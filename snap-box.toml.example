@@ -1,0 +1,40 @@
+[daemon]
+bind_addr = "127.0.0.1:7432"
+pid_file = "/tmp/snap-box/snap-box.pid"
+shutdown_grace_ms = 2000
+json_logs = false
+
+[pool]
+min_warm = 2
+target_warm = 4
+max_sandboxes = 16
+max_concurrent_provisions = 4
+allocation_policy = "fifo"
+default_lease_ttl_secs = 300
+idle_timeout_secs = 180
+reaper_interval_ms = 1000
+max_reuses_per_sandbox = 50
+
+[storage]
+# Optional path to your base repository/environment; if omitted, snap-box creates a default base tree.
+# base_source_dir = "/path/to/base/project"
+data_root = "/tmp/snap-box-data"
+base_id = "default-env"
+allow_non_cow_fallback = false
+
+[security]
+strip_host_env = true
+allow_network = false
+enforce_path_confinement = true
+enforce_rlimits = true
+macos_seatbelt_profile = false
+linux_enable_namespaces = true
+linux_enable_cgroups = true
+
+[resources]
+max_memory_bytes = 536870912
+max_cpu_seconds = 30
+max_disk_bytes = 536870912
+max_open_files = 256
+max_processes = 64
+execution_timeout_ms = 30000
